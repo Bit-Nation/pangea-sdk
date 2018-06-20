@@ -1,0 +1,17 @@
+{
+  "name": "vm-react",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fbjs": "^0.8.17",
+    "react": "^16.4.1",
+    "react-reconciler": "^0.12.0"
+  }
+}
