@@ -1,0 +1,22 @@
+{
+  "name": "pangea-sdk",
+  "version": "0.0.0",
+  "description": "Pangea software development toolkit",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bit-Nation/pangea-sdk.git"
+  },
+  "keywords": [
+    "pangea"
+  ],
+  "author": "Florian Lenz (Bitnation)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Bit-Nation/pangea-sdk/issues"
+  },
+  "homepage": "https://github.com/Bit-Nation/pangea-sdk#readme"
+}
