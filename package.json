@@ -4,7 +4,8 @@
   "description": "Pangea software development toolkit",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "test:coverage": "jest --coverage"
   },
   "repository": {
     "type": "git",
@@ -18,5 +19,12 @@
   "bugs": {
     "url": "https://github.com/Bit-Nation/pangea-sdk/issues"
   },
-  "homepage": "https://github.com/Bit-Nation/pangea-sdk#readme"
+  "homepage": "https://github.com/Bit-Nation/pangea-sdk#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-jest": "^23.0.1",
+    "babel-plugin-jest-hoist": "^23.0.1",
+    "babel-preset-env": "^1.7.0",
+    "jest": "^23.1.0"
+  }
 }
