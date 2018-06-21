@@ -1,39 +1,30 @@
-import VM from '../../vm-raw'
+import VM from '../vm-raw'
 
-class BaseElement {
+export default class BaseElement {
 
-    constructor(props) {
-        this.children = [];
+    constructor(props, children) {
         this.props = props;
-    }
-
-    setProps(props) {
-        this.props = props
-    }
-
-    appendChild(child){
-        this.children.push(child)
+        this.children = children;
     }
 
     toJSON(){
 
-        const children = this.children.map((child) => child.toJSON());
+        const children = this.children.map((child) => {
+            if(typeof child === 'string') {
+                return child
+            }
+            return child.toJSON()
+        });
 
-        const props = {};
         Object.keys(this.props).map((key) => {
-            if (key !== 'children' || typeof this.props[key].children !== 'string'){
-                const value = this.props[key];
-                if (typeof value === 'function'){
-                    props[key] = VM.registerFunction(value);
-                    return
-                }
-                props[key] = this.props[key]
+            if (typeof this.props[key] === 'function'){
+                this.props[key] = VM.registerFunction(this.props[key])
             }
         });
 
         return {
             type: this.type,
-            props: props,
+            props: this.props,
             children: children,
         }
 

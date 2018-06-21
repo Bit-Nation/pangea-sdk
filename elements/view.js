@@ -1,8 +1,8 @@
 import BaseElement from './base'
 
-export class View extends BaseElement {
+export default class View extends BaseElement {
 
-    static get type() {
+    get type() {
         return "View"
     }
 

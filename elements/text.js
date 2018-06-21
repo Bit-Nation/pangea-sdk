@@ -1,8 +1,8 @@
 import BaseElement from './base'
 
-export class Text extends BaseElement {
+export default class Text extends BaseElement {
 
-    static get type() {
+    get type() {
         return "Text"
     }
 
