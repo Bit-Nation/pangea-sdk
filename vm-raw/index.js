@@ -19,5 +19,9 @@ export default {
      * @param {TransactionParams} transactionParams
      * @param {function} callback will be called with the transaction (including TX hash). value, gasLimit, gasPrice must be base 10
      */
-    sendETHTransaction: global.sendETHTransaction
+    sendETHTransaction: global.sendETHTransaction,
+    /**
+     * @desc get ethereum address of the current user (from pangea)
+     */
+    pangeaETHAddress: global.pangeaETHAddress
 }
