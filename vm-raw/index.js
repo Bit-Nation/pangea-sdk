@@ -11,14 +11,13 @@ export default {
     ethereumRequest: global.ethereumRequest,
     /**
      * @typedef {Object} TransactionParams
-     * @property {string} purpose
-     * @property {string} amount (in WEI!)
+     * @property {string} value (in WEI!)
      * @property {string} to (address)
      * @property {string} data
      *
      * @desc send an ethereum transaction
      * @param {TransactionParams} transactionParams
-     * @param {function} callback will be called with transaction hash and error (null if no error)
+     * @param {function} callback will be called with the transaction (including TX hash). value, gasLimit, gasPrice must be base 10
      */
     sendETHTransaction: global.sendETHTransaction
 }
