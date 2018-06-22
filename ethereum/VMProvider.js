@@ -1,6 +1,6 @@
 import {ethereumRequest} from '../vm-raw'
 
-const JsonRpcProvider = require('./ethers').provider.JsonRpcProvider;
+const JsonRpcProvider = require('./ethers').providers.JsonRpcProvider;
 const defineProperty = require('./ethers').utils.defineProperty;
 
 /**
@@ -28,7 +28,7 @@ defineProperty(VMProvider.prototype, 'send', function(method, params) {
         ethereumRequest(payload, (response, error) => {
 
             // reject on error
-            if (!error){
+            if (error){
                 return reject(error)
             }
 
@@ -37,7 +37,7 @@ defineProperty(VMProvider.prototype, 'send', function(method, params) {
             try {
                 parsedResponse = JSON.parse(response)
             } catch (err){
-                return reject(error)
+                return reject(err)
             }
 
             return resolve(parsedResponse)
