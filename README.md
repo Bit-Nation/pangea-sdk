@@ -1,7 +1,7 @@
 # pangea-sdk
 
 [![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
-TODO: Put more badges here.
+[![Build Status](https://semaphoreci.com/api/v1/florianlenz/pangea-sdk/branches/master/badge.svg)](https://semaphoreci.com/florianlenz/pangea-sdk)
 
 > Pangea Software Development Toolkit
 
