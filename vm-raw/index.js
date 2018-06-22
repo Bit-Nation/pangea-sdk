@@ -8,5 +8,17 @@ export default {
      * @param requestObject
      * @param callback
      */
-    ethereumRequest: global.ethereumRequest
+    ethereumRequest: global.ethereumRequest,
+    /**
+     * @typedef {Object} TransactionParams
+     * @property {string} purpose
+     * @property {string} amount (in WEI!)
+     * @property {string} to (address)
+     * @property {string} data
+     *
+     * @desc send an ethereum transaction
+     * @param {TransactionParams} transactionParams
+     * @param {function} callback will be called with transaction hash and error (null if no error)
+     */
+    sendETHTransaction: global.sendETHTransaction
 }
