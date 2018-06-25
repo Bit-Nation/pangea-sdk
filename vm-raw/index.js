@@ -27,12 +27,18 @@ export default {
 
     /**
      * @desc send a message via the chat
-     * @desc {string}   type Type of this message e.g. "SEND_MONEY" (can be chosen by developer)
-     * @desc {string}   group Group that the message relates to
-     * @desc {object}   params A set of parameters
-     * @desc {bool}     shouldSend Should this message be send to your chat partners
-     * @desc {bool}     shouldRender Should this message be rendered
-     * @desc {function} callback The callback will be called when the message has been send
+     * @param {string}   type Type of this message e.g. "SEND_MONEY" (can be chosen by developer)
+     * @param {string}   group Group that the message relates to
+     * @param {object}   params A set of parameters
+     * @param {bool}     shouldSend Should this message be send to your chat partners
+     * @param {bool}     shouldRender Should this message be rendered
+     * @param {function} callback The callback will be called when the message has been send
      */
     sendMessage: global.sendMessage,
+
+    /**
+     * @desc set open handler
+     * @param {function} callback
+     */
+    setOpenHandler: global.onOpen,
 }
