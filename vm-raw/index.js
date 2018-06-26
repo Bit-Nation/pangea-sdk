@@ -41,4 +41,22 @@ export default {
      * @param {function} callback
      */
     setOpenHandler: global.onOpen,
+
+    /**
+     * @desc show modal
+     * @param {string} title Title to display on modal
+     * @param {string} layout Layout of the modal body
+     * @param {function|null} will be called when modal is rendered
+     */
+    showModal: global.showModal,
+
+    /**
+     * @typedef {Object} DAppMessage
+     *
+     * @desc render a message and return json layout
+     * @param {DAppMessage} dAppMessage The DApp message
+     * @param {Object} context
+     * @param {function} callback
+     */
+    setMessageHandler: global.setMessageHandler
 }

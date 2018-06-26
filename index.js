@@ -6,6 +6,8 @@ const Pangea = {
     sendMessage: vm.sendMessage,
     pangeaETHAddress: vm.pangeaETHAddress,
     setOpenHandler: vm.setOpenHandler,
+    showModal: vm.showModal,
+    setMessageHandler: vm.setMessageHandler
 };
 
 export default Object.assign(UIElements, Pangea);
