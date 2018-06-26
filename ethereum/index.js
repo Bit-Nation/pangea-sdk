@@ -1,3 +1,5 @@
+const Uint8Array = require('typedarray').Uint8Array;
+
 import {pangeaETHAddress} from '../vm-raw'
 const VMProvider = require('./vmProvider');
 const VMSigner = require('./VMSigner');

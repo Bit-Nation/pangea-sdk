@@ -26,5 +26,8 @@
     "babel-plugin-jest-hoist": "^23.0.1",
     "babel-preset-env": "^1.7.0",
     "jest": "^23.1.0"
+  },
+  "dependencies": {
+    "typedarray": "0.0.6"
   }
 }
