@@ -1,12 +1,14 @@
 export default {
     /**
      * @desc add a function to the VM a unique reference will be returned
+     * @param {function} the callback that should be registered
+     * @returns {int|Error} an error or unique id
      */
-    registerFunction: global.vmRegisterFunction,
+    registerFunction: global.registerFunction,
     /**
      * @desc sends an json rpc request to the ethereum network
-     * @param requestObject
-     * @param callback
+     * @param {Object} requestObject json rpc request
+     * @param {callback} callback can be called with error or json rpc response (string)
      */
     ethereumRequest: global.ethereumRequest,
     /**
@@ -17,14 +19,9 @@ export default {
      *
      * @desc send an ethereum transaction
      * @param {TransactionParams} transactionParams
-     * @param {function} callback will be called with the transaction (including TX hash). value, gasLimit, gasPrice must be base 10
+     * @param {function} callback - will be called with error or transaction
      */
     sendETHTransaction: global.sendETHTransaction,
-    /**
-     * @desc get ethereum address of the current user (from pangea)
-     */
-    pangeaETHAddress: global.pangeaETHAddress,
-
     /**
      * @desc send a message via the chat
      * @param {string}   type Type of this message e.g. "SEND_MONEY" (can be chosen by developer)
@@ -35,28 +32,32 @@ export default {
      * @param {function} callback The callback will be called when the message has been send
      */
     sendMessage: global.sendMessage,
-
     /**
      * @desc set open handler
-     * @param {function} callback
+     * @param {function} handler - will be called with payload and callback. The callback must be called (with an optional error)
      */
-    setOpenHandler: global.onOpen,
-
+    setOpenHandler: global.setOpenHandler,
     /**
      * @desc show modal
      * @param {string} title Title to display on modal
      * @param {string} layout Layout of the modal body
-     * @param {function|null} will be called when modal is rendered
+     * @param {function} will be called when the modal is about to render
      */
     showModal: global.showModal,
-
     /**
-     * @typedef {Object} DAppMessage
-     *
-     * @desc render a message and return json layout
-     * @param {DAppMessage} dAppMessage The DApp message
-     * @param {Object} context
-     * @param {function} callback
+     * @desc handle a message and render it's layout
+     * @param {object} payload with message and context
+     * @param {function} callback - should be called with error and layout
      */
-    setMessageHandler: global.setMessageHandler
+    setMessageHandler: global.setMessageHandler,
+    /**
+     * @desc ethereum address of this pangea user
+     */
+    ethereumAddress: global.ethereumAddress,
+    /**
+     * @desc Generates random bytes
+     * @param {number} amount the amount of random bytes that should be generated
+     * @param {function} callback - will be called with error and bytes
+     */
+    randomBytes: global.randomBytes,
 }
