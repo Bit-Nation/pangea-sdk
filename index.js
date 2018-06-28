@@ -4,7 +4,7 @@ import vm from './vm-raw'
 const Pangea = {
     renderUI: render,
     sendMessage: vm.sendMessage,
-    pangeaETHAddress: vm.pangeaETHAddress,
+    ethereumAddress: vm.ethereumAddress,
     setOpenHandler: vm.setOpenHandler,
     showModal: vm.showModal,
     setMessageHandler: vm.setMessageHandler
