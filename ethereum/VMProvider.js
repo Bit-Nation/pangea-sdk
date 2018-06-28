@@ -25,7 +25,7 @@ defineProperty(VMProvider.prototype, 'send', function(method, params) {
     return new Promise((resolve, reject) => {
 
         // send request to ethereum
-        ethereumRequest(payload, (response, error) => {
+        ethereumRequest(payload, (error, response) => {
 
             // reject on error
             if (error){
