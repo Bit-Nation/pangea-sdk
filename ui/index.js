@@ -1,10 +1,10 @@
 /**
  * @desc Render UI to json representation
  * @param element
- * @returns {*|{type, props, children}|any|string}
+ * @returns {Object} the rendered layout as a string
  */
 export function render(element) {
-    return element.toJSON()
+    return JSON.stringify(element.toJSON())
 }
 
 export const UIElements = {

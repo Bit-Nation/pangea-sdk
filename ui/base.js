@@ -18,7 +18,11 @@ export default class BaseElement {
 
         Object.keys(this.props).map((key) => {
             if (typeof this.props[key] === 'function'){
-                this.props[key] = VM.registerFunction(this.props[key])
+                const funcID = VM.registerFunction(this.props[key]);
+                if (typeof funcID !== 'number') {
+                    throw new Error(`Expected function id to be a number but got this: `+funcID);
+                }
+                this.props[key] = funcID;
             }
         });
 
