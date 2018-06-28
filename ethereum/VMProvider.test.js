@@ -15,7 +15,7 @@ describe('VMProvider', () => {
 
         vmRaw.ethereumRequest = (data, cb) => {
             expect(data).toEqual("{\"method\":\"eth_getBalance\",\"params\":[\"0x407d73d8a49eeb85d32cf465507dd71d507100c1\",\"latest\"],\"jsonrpc\":\"2.0\"}")
-            cb(JSON.stringify({
+            cb(null, JSON.stringify({
                 "id":1,
                 "jsonrpc": "2.0",
                 "result": "0x0234c8a3397aab58" // 158972490234375000
@@ -44,7 +44,7 @@ describe('VMProvider', () => {
         const provider = new VMProvider();
 
         vmRaw.ethereumRequest = (data, cb) => {
-            cb(null, "I am an error")
+            cb("I am an error")
         };
 
         provider
