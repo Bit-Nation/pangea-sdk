@@ -7,7 +7,7 @@
     "test": "BABEL_ENV=development jest",
     "test:coverage": "jest --coverage",
     "babel": "babel src --out-dir dist",
-    "postinstall": "npm run babel"
+    "postinstall": "BABEL_ENV=production npm run babel"
   },
   "repository": {
     "type": "git",
