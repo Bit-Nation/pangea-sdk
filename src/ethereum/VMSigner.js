@@ -33,7 +33,7 @@ export default class VMSigner {
 
     sendTransaction(transaction){
         return new Promise((res, rej) => {
-            sendETHTransaction(transaction, (signedTransaction, error) => {
+            sendETHTransaction(transaction, (error, signedTransaction) => {
 
                 if (error){
                     return rej(error)

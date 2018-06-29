@@ -57,7 +57,7 @@ describe('VMSigner', () => {
                     tx.gasLimit = tx.gasLimit.toString(10);
                     tx.value = tx.value.toString(10);
 
-                    cb(JSON.stringify(tx), null)
+                    cb(null, JSON.stringify(tx))
 
                 })
                 .catch((err) => cb(null, err))
