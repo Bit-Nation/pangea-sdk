@@ -9,12 +9,14 @@ export default class BaseElement {
 
     toJSON(){
 
-        const children = this.children.map((child) => {
-            if(typeof child === 'string') {
-                return child
-            }
-            return child.toJSON()
-        });
+        if (typeof this.children === "string") {
+            this.children = this.children.map((child) => {
+                if(typeof child === 'string') {
+                    return child
+                }
+                return child.toJSON()
+            });
+        }
 
         Object.keys(this.props).map((key) => {
             if (typeof this.props[key] === 'function'){
@@ -29,7 +31,7 @@ export default class BaseElement {
         return {
             type: this.type,
             props: this.props,
-            children: children,
+            children: this.children,
         }
 
     }
