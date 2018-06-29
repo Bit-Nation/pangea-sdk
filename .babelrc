@@ -1,13 +1,19 @@
 {
-  "plugins": ["jest-hoist"],
+  "env": {
+    "development": {
+      "plugins": "jest-hoist",
+      "presets": [
+        ["env",
+          {
+            "targets": {
+              "node": "current"
+            }
+          }],
+        "jest"
+      ]
+    }
+  },
   "presets": [
-    ["env",
-      {
-        "targets": {
-          "node": "current"
-        }
-      }],
-    "jest",
     "es2015"
   ]
 }
