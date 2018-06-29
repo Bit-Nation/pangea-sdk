@@ -2,10 +2,11 @@
   "name": "pangea-sdk",
   "version": "0.0.0",
   "description": "Pangea software development toolkit",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "jest",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "babel": "babel src --out-dir dist"
   },
   "repository": {
     "type": "git",
@@ -21,10 +22,11 @@
   },
   "homepage": "https://github.com/Bit-Nation/pangea-sdk#readme",
   "devDependencies": {
-    "babel-core": "^6.26.3",
+    "babel-cli": "^6.26.0",
     "babel-jest": "^23.0.1",
     "babel-plugin-jest-hoist": "^23.0.1",
     "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.24.1",
     "jest": "^23.1.0"
   },
   "dependencies": {
