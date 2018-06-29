@@ -14232,7 +14232,7 @@ function hexSlice(hex, start, end) {
             var whole = value.div(unitInfo.tenPower).toString(10);
 
             if (options.commify) {
-                whole = whole.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                whole = whole.match(/.{3}/g).join(',');
             }
 
             var value = whole + '.' + fraction;
