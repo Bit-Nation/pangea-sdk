@@ -1,10 +1,14 @@
-import VM from '../vm-raw'
+import VM from '../vm'
 
 export default class BaseElement {
 
-    constructor(props, children) {
-        this.props = props;
-        this.children = children;
+    constructor(type) {
+        if (typeof type !== "string"){
+            throw new Error(`type must be a string`)
+        }
+        this.type = type;
+        this.props = {};
+        this.children = [];
     }
 
     toJSON(){

@@ -1,7 +1,7 @@
 const VMProvider = require('./VMProvider');
-const vmRaw = require('../vm-raw');
+const vmRaw = require('../vm');
 
-jest.mock('../vm-raw', () => {
+jest.mock('../vm', () => {
     return {
         ethereumRequest: jest.fn()
     }

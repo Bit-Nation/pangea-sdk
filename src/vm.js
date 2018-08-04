@@ -60,4 +60,17 @@ export default {
      * @param {function} callback - will be called with error and bytes
      */
     randomBytes: global.randomBytes,
+    /**
+     * @desc Generates a new modal User Interface ID
+     * @param {function} closer - the closer will be called when the modal is closed
+     * @param {function} callback - the callback will be called with and error and an ui id
+     */
+    newModalUIID: global.newModalUIID,
+    /**
+     * @desc Render a modal
+     * @param {string} uiID - the UI id of the modal
+     * @param {string} layout - the JSX Json layout
+     * @param {function} callback - will ba called with an error after the modal got rendered
+     */
+    renderModal: global.renderModal
 }

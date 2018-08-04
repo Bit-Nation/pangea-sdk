@@ -1,5 +1,5 @@
 import {render, UIElements} from "./ui"
-import vm from './vm-raw'
+import vm from './vm'
 import ethereum from './ethereum'
 
 const Pangea = {

@@ -1,11 +1,11 @@
 import VMSigner from './VMSigner'
-import VM from '../vm-raw'
+import VM from '../vm'
 const VMProvider = require('./VMProvider');
 const Wallet = require('./ethers').Wallet;
 const InfuraProvider = require('./ethers').providers.InfuraProvider;
-const ethersUtils = require('./ethers').utils
+const ethersUtils = require('./ethers').utils;
 
-jest.mock('../vm-raw', () => {
+jest.mock('../vm', () => {
     return {
         sendETHTransaction: jest.fn()
     }

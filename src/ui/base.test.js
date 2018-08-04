@@ -1,7 +1,7 @@
 import BaseElement from './base'
-import VM from '../vm-raw'
+import VM from '../vm'
 
-jest.mock('../vm-raw', () => {
+jest.mock('../vm', () => {
     return {
         registerFunction: jest.fn()
     }
@@ -11,17 +11,9 @@ describe('base element', () => {
 
     test('initialize element', () => {
 
-        const base = new BaseElement(
-            {
-                key: "value"
-            },
-            [
-                "my child"
-            ]
-        );
+        const base = new BaseElement("View");
 
-        expect(base.props.key).toBe("value");
-        expect(base.children[0]).toBe("my child");
+        expect(base.type).toBe("View");
 
     });
 
@@ -38,42 +30,21 @@ describe('base element', () => {
 
         });
 
-        class ViewMock extends BaseElement{
-            get type(){ return "ViewMock" }
-        }
+        const child = new BaseElement("Text");
 
-        class TextMock extends BaseElement{
-            get type(){ return "TextMock" }
-        }
+        const ui = new BaseElement("TouchableElement");
+        ui.props = {
+            onEvent: eventHandler
+        };
+        ui.children = [
+            child
+        ];
 
-        const ui = new ViewMock(
-            {
-                onEvent: eventHandler
-            },
-            [
-                new TextMock(
-                    {},
-                    ["salve"]
-                ),
-                new TextMock(
-                    {},
-                    ["consavis"]
-                ),
-            ]
-        ).toJSON();
+        const jsonTree = ui.toJSON();
 
-        // make sure type is as expected
-        expect(ui.type).toBe("ViewMock");
-
-        // an callback should be replaced by a reference
-        // this reference will be used by the VM to call that function
-        expect(ui.props.onEvent).toBe(45);
-
-        expect(ui.children[0].props).toEqual({});
-        expect(ui.children[0].children).toEqual(["salve"]);
-
-        expect(ui.children[1].props).toEqual({});
-        expect(ui.children[1].children).toEqual(["consavis"]);
+        expect(jsonTree.type).toBe("TouchableElement");
+        expect(jsonTree.props.onEvent).toBe(45);
+        expect(jsonTree.children[0]).toBe(child);
 
     })
 

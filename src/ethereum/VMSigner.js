@@ -1,4 +1,4 @@
-import {sendETHTransaction} from '../vm-raw'
+import {sendETHTransaction} from '../vm'
 const Wallet = require('./ethers').Wallet;
 const BN = require('./ethers').utils.BigNumber;
 

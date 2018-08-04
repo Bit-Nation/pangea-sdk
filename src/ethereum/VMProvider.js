@@ -1,4 +1,4 @@
-import {ethereumRequest} from '../vm-raw'
+import {ethereumRequest} from '../vm'
 
 const JsonRpcProvider = require('./ethers').providers.JsonRpcProvider;
 const defineProperty = require('./ethers').utils.defineProperty;
