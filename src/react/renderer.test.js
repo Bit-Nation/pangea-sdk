@@ -23,7 +23,7 @@ describe('renderer', () => {
             }
 
             renderMessage(<SentMoneyMessage  />, (jsx) => {
-                expect(jsx).toEqual({});
+                expect(jsx).toEqual([]);
                 done();
             })
 
@@ -50,7 +50,7 @@ describe('renderer', () => {
             }
 
             renderMessage(<SentMoneyMessage />, (jsx) => {
-                const expectedJsonTree = {
+                const expectedJsonTree = [{
                     type: "View",
                     props: {},
                     children: [
@@ -78,7 +78,7 @@ describe('renderer', () => {
                             ]
                         }
                     ]
-                };
+                }];
 
                 expect(jsx).toEqual(expectedJsonTree);
 

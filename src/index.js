@@ -1,15 +1,18 @@
-import {render, UIElements} from "./ui"
 import vm from './vm'
 import ethereum from './ethereum'
+import {renderMessage, renderModal} from './react/renderer'
 
 const Pangea = {
-    renderUI: render,
-    sendMessage: vm.sendMessage,
     ethereumAddress: vm.ethereumAddress,
-    setOpenHandler: vm.setOpenHandler,
-    showModal: vm.showModal,
     setMessageHandler: vm.setMessageHandler,
     etherjs: ethereum,
+    renderMessage: renderMessage,
+    renderModal: renderModal,
+    sendETHTransaction: vm.sendETHTransaction,
+    setOpenHandler: vm.setOpenHandler,
+    setMessageRenderer: vm.setMessageRenderer,
+    randomBytes: vm.randomBytes,
+    newModalUIID: vm.newModalUIID,
 };
 
-export default Object.assign(UIElements, Pangea);
+export default Pangea

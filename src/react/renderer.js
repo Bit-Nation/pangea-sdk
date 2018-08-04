@@ -2,7 +2,7 @@ import React from 'react';
 import Reconciler from 'react-reconciler';
 import emptyObject from 'fbjs/lib/emptyObject';
 import {registerFunction, renderModal as clientRenderModal} from '../vm'
-import BaseElement from '../ui/base'
+import BaseElement from '../react/base'
 import Container from "./container";
 
 const hostConfig = {

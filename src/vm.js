@@ -38,18 +38,11 @@ export default {
      */
     setOpenHandler: global.setOpenHandler,
     /**
-     * @desc show modal
-     * @param {string} title Title to display on modal
-     * @param {string} layout Layout of the modal body
-     * @param {function} will be called when the modal is about to render
-     */
-    showModal: global.showModal,
-    /**
-     * @desc handle a message and render it's layout
+     * @desc set a message renderer
      * @param {object} payload with message and context
      * @param {function} callback - should be called with error and layout
      */
-    setMessageHandler: global.setMessageHandler,
+    setMessageRenderer: global.setMessageRenderer,
     /**
      * @desc ethereum address of this pangea user
      */
