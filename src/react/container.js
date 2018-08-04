@@ -4,7 +4,7 @@ export default class Container {
      * @param {string} uiID the location in pangea were this react will render
      */
     constructor(uiID){
-        this.child = null;
+        this.children = [];
         this.uiID = uiID;
     }
 
@@ -13,20 +13,33 @@ export default class Container {
      * @param {object} child root child of this container
      */
     appendChild(child){
-        if (this.child){
-            throw new Error(`Already set child. Root container can only have one child.`)
-        }
-        this.child = child;
+        this.children.push(child)
     }
 
     /**
-     * @desc update pangea UI
+     * @param child
+     */
+    removeChild(child){
+        this.children = this.children.filter((c) => c !== child)
+    }
+
+    /**
+     * @param child
+     * @param beforeChild
+     */
+    insertBefore(child, beforeChild){
+        this.children.map((currentChild, index) => {
+            if(currentChild === beforeChild){
+                this.children.splice(index, 0, child)
+            }
+        })
+    }
+
+    /**
+     * @desc get jsx tree as json
      */
     toJson(){
-        if (!this.child){
-            return {}
-        }
-        return this.child.toJson()
+        return this.children.map((child) => child.toJson())
     }
 
 }

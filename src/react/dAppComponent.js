@@ -3,27 +3,33 @@ const {renderModal} = require('../vm');
 
 export class Message extends React.Component {}
 
-export class ReactComponent extends React.Component {
-
+export class ModalComponent extends React.Component {
     setState(data, cb){
+        const modalContainer = this.props.modalContainer;
+        if (!modalContainer){
+            throw new Error(`the component must have a modalContainer`)
+        }
+        if (typeof modalContainer.uiID !== "string") {
+            throw new Error(`expected uiID of container to be a string`)
+        }
         if (typeof cb !== "function"){
             throw new Error("you have to pass a callback to set state")
         }
         super.setState(data, () => {
-            renderModal(this.uiID, this.container.toJSON(), cb)
+            renderModal(modalContainer.uiID, modalContainer.toJson(), cb)
         })
     }
-
 }
 
-export class Modal {
+export class Modal extends ModalComponent{
     /**
      *
      * @param props
      */
     constructor(props) {
-        if (!props.container){
-            throw new Error(`Modal needs a container`);
+        super();
+        if (!props.modalContainer){
+            throw new Error(`Modal needs an container`);
         }
         this.props = props
     }

@@ -17,12 +17,15 @@ export default class BaseElement {
 
     toJson(){
 
-        if (typeof this.children === "string") {
-            this.children = this.children.map((child) => {
-                if(typeof child === 'string') {
+        let children;
+        if (typeof this.children === 'string' || typeof this.children === 'number'){
+            children = this.children
+        } else {
+            children = this.children.map((child) => {
+                if(typeof child === 'string' || typeof child === 'number') {
                     return child
                 }
-                return child.toJSON()
+                return child.toJson()
             });
         }
 
@@ -39,7 +42,7 @@ export default class BaseElement {
         return {
             type: this.type,
             props: this.props,
-            children: this.children,
+            children: children,
         }
 
     }

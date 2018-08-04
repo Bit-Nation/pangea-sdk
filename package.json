@@ -4,7 +4,7 @@
   "description": "Pangea software development toolkit",
   "main": "dist/index.js",
   "scripts": {
-    "test": "BABEL_ENV=development jest src",
+    "test": "BABEL_ENV=development jest src --forceExit --detectOpenHandles",
     "test:coverage": "jest --coverage",
     "babel": "BABEL_ENV=production babel src --out-dir dist",
     "postinstall": "BABEL_ENV=production npm run babel"

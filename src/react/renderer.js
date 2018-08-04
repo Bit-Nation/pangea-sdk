@@ -1,7 +1,7 @@
 import React from 'react';
 import Reconciler from 'react-reconciler';
 import emptyObject from 'fbjs/lib/emptyObject';
-import {registerFunction, newModalUIID} from '../vm'
+import {registerFunction, renderModal as clientRenderModal} from '../vm'
 import BaseElement from '../ui/base'
 import Container from "./container";
 
@@ -12,7 +12,7 @@ const hostConfig = {
     },
 
     createInstance(type, props, rootContainerInstance, hostContext, internalInstanceHandle) {
-        return new BaseElement(type)
+        return new BaseElement(type);
     },
 
     createTextInstance(text, rootContainerInstance, internalInstanceHandle) {
@@ -56,7 +56,7 @@ const hostConfig = {
 
     // Calculate the updatePayload
     prepareUpdate(domElement, type, oldProps, newProps) {
-        throw new Error(`prepareUpdate not implemented`)
+        return newProps
     },
 
     getRootHostContext(rootInstance) {
@@ -127,13 +127,13 @@ const PangeaRenderer = Reconciler(hostConfig);
  * @param {object} element
  * @param {function} cb will be called with the rendered JSX as json
  */
-export function renderMessage(element, cb) {
+export const renderMessage = (element, cb) => {
     const container = new Container();
     const root = container._reactRootContainer = PangeaRenderer.createContainer(container);
     PangeaRenderer.updateContainer(element, root, null, () => {
         cb(container.toJson())
     });
-}
+};
 
 /**
  * @desc render a modal
@@ -141,11 +141,13 @@ export function renderMessage(element, cb) {
  * @param {function} cb
  * @return {*}
  */
-export function renderModal(element, cb) {
-    const container = element.props.container;
+export const renderModal = (element, cb) => {
+    const container = element.props.modalContainer;
     if (!container){
         throw new Error(`Missing container for modal`)
     }
     const root = container._reactRootContainer = PangeaRenderer.createContainer(container);
-    return PangeaRenderer.updateContainer(element, root, null, cb);
-}
+    return PangeaRenderer.updateContainer(element, root, null, () => {
+        clientRenderModal(container.uiID, JSON.stringify(container.toJson()), cb);
+    });
+};
