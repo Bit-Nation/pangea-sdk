@@ -22,8 +22,11 @@ export default class Container {
     /**
      * @desc update pangea UI
      */
-    toJSON(){
-        return this.child.toJSON()
+    toJson(){
+        if (!this.child){
+            return {}
+        }
+        return this.child.toJson()
     }
 
 }

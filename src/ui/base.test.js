@@ -40,7 +40,7 @@ describe('base element', () => {
             child
         ];
 
-        const jsonTree = ui.toJSON();
+        const jsonTree = ui.toJson();
 
         expect(jsonTree.type).toBe("TouchableElement");
         expect(jsonTree.props.onEvent).toBe(45);

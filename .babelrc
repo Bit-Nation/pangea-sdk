@@ -1,7 +1,10 @@
 {
   "env": {
     "development": {
-      "plugins": "jest-hoist",
+      "plugins": [
+        "jest-hoist",
+        "transform-react-jsx"
+      ],
       "presets": [
         ["env",
           {

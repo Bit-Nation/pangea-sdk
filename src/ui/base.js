@@ -11,7 +11,11 @@ export default class BaseElement {
         this.children = [];
     }
 
-    toJSON(){
+    append(child){
+        this.children.push(child)
+    }
+
+    toJson(){
 
         if (typeof this.children === "string") {
             this.children = this.children.map((child) => {

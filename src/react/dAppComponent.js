@@ -1,19 +1,7 @@
 const React = require('react');
-const {renderModal} = requrie('../vm-raw');
+const {renderModal} = require('../vm');
 
-export class Message extends React.Component {
-    /**
-     *
-     * @param props
-     */
-    constructor(props) {
-        super();
-        if (!props.container){
-            throw new Error(`Message needs a container`);
-        }
-        this.props = props
-    }
-}
+export class Message extends React.Component {}
 
 export class ReactComponent extends React.Component {
 

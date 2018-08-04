@@ -1,8 +1,9 @@
 import React from 'react';
 import Reconciler from 'react-reconciler';
 import emptyObject from 'fbjs/lib/emptyObject';
-import {registerFunction, newModalUIID} from '../vm-raw'
+import {registerFunction, newModalUIID} from '../vm'
 import BaseElement from '../ui/base'
+import Container from "./container";
 
 const hostConfig = {
 
@@ -80,76 +81,71 @@ const hostConfig = {
 
     supportsMutation: true,
 
-    mutation: {
-        appendChild(parentInstance, child) {
-            parentInstance.appendChild(child);
-        },
-
-        // appendChild to root container
-        appendChildToContainer(parentInstance, child) {
-            parentInstance.appendChild(child);
-        },
-
-        removeChild(parentInstance, child) {
-            parentInstance.removeChild(child);
-        },
-
-        removeChildFromContainer(parentInstance, child) {
-            parentInstance.removeChild(child);
-        },
-
-        insertBefore(parentInstance, child, beforeChild) {
-            parentInstance.insertBefore(child, beforeChild);
-        },
-
-        insertInContainerBefore(parentInstance, child, beforeChild) {
-            parentInstance.insertBefore(child, beforeChild);
-        },
-
-        commitUpdate(domElement, updatePayload, type, oldProps, newProps, internalInstanceHandle) {},
-
-        commitMount(domElement, type, newProps, internalInstanceHandle) {},
-
-        commitTextUpdate(textInstance, oldText, newText) {
-            throw new Error("commitTextUpdate not implemented")
-        },
-
-        resetTextContent(domElement) {
-            throw new Error("resetTextContent not implemented")
-        },
+    appendChild(parentInstance, child) {
+        parentInstance.appendChild(child);
     },
+
+    // appendChild to root container
+    appendChildToContainer(parentInstance, child) {
+        parentInstance.appendChild(child);
+    },
+
+    removeChild(parentInstance, child) {
+        parentInstance.removeChild(child);
+    },
+
+    removeChildFromContainer(parentInstance, child) {
+        parentInstance.removeChild(child);
+    },
+
+    insertBefore(parentInstance, child, beforeChild) {
+        parentInstance.insertBefore(child, beforeChild);
+    },
+
+    insertInContainerBefore(parentInstance, child, beforeChild) {
+        parentInstance.insertBefore(child, beforeChild);
+    },
+
+    commitUpdate(domElement, updatePayload, type, oldProps, newProps, internalInstanceHandle) {},
+
+    commitMount(domElement, type, newProps, internalInstanceHandle) {},
+
+    commitTextUpdate(textInstance, oldText, newText) {
+        throw new Error("commitTextUpdate not implemented")
+    },
+
+    resetTextContent(domElement) {
+        throw new Error("resetTextContent not implemented")
+    },
+
 };
 
 const PangeaRenderer = Reconciler(hostConfig);
 
-export default {
-    /**
-     * @desc render a message
-     * @param {object} element
-     * @param {function} cb will be called with the rendered JSX as json
-     */
-    renderMessage: (element, cb) => {
-        const container = element.props.container;
-        if (!container){
-            throw new Error(`no container present`)
-        }
-        const root = container._reactRootContainer = PangeaRenderer.createContainer(container);
-        PangeaRenderer.updateContainer(element, root, null, () => {
-            cb(container.toJSON())
-        });
-    },
-    /**
-     * @desc render a modal
-     * @param {Modal} element
-     * @param {function} cb
-     * @return {*}
-     */
-    renderModal: (element, cb) => {
-        const container = element.props.container;
-        if (!container){
-            throw new Error(`Missing container for modal`)
-        }
-        const root = container._reactRootContainer = PangeaRenderer.createContainer(container);
-        return PangeaRenderer.updateContainer(element, root, null, cb);
-    },
-};
+/**
+ * @desc render a message
+ * @param {object} element
+ * @param {function} cb will be called with the rendered JSX as json
+ */
+export function renderMessage(element, cb) {
+    const container = new Container();
+    const root = container._reactRootContainer = PangeaRenderer.createContainer(container);
+    PangeaRenderer.updateContainer(element, root, null, () => {
+        cb(container.toJson())
+    });
+}
+
+/**
+ * @desc render a modal
+ * @param {Modal} element
+ * @param {function} cb
+ * @return {*}
+ */
+export function renderModal(element, cb) {
+    const container = element.props.container;
+    if (!container){
+        throw new Error(`Missing container for modal`)
+    }
+    const root = container._reactRootContainer = PangeaRenderer.createContainer(container);
+    return PangeaRenderer.updateContainer(element, root, null, cb);
+}
