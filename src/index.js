@@ -2,6 +2,7 @@ import vm from './vm'
 import ethereum from './ethereum'
 import {renderMessage, renderModal} from './react/renderer'
 import {ModalComponent, Modal} from './react/dAppComponent'
+import Container from './react/container'
 
 const Pangea = {
     ethereumAddress: vm.ethereumAddress,
@@ -18,6 +19,7 @@ const Pangea = {
     db: vm.db,
     Modal: Modal,
     ModalComponent: ModalComponent,
+    Container: Container
 };
 
 export default Pangea
