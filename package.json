@@ -1,6 +1,6 @@
 {
   "name": "pangea-sdk",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Pangea software development toolkit",
   "main": "dist/index.js",
   "scripts": {

@@ -9,10 +9,12 @@ const Pangea = {
     renderMessage: renderMessage,
     renderModal: renderModal,
     sendETHTransaction: vm.sendETHTransaction,
+    sendMessage: vm.sendMessage,
     setOpenHandler: vm.setOpenHandler,
     setMessageRenderer: vm.setMessageRenderer,
     randomBytes: vm.randomBytes,
     newModalUIID: vm.newModalUIID,
+    db: vm.db
 };
 
 export default Pangea
