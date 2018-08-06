@@ -23,13 +23,15 @@ export default {
      */
     sendETHTransaction: global.sendETHTransaction,
     /**
-     * @desc send a message via the chat
-     * @param {string}   type Type of this message e.g. "SEND_MONEY" (can be chosen by developer)
-     * @param {string}   group Group that the message relates to
-     * @param {object}   params A set of parameters
-     * @param {bool}     shouldSend Should this message be send to your chat partners
-     * @param {bool}     shouldRender Should this message be rendered
-     * @param {function} callback The callback will be called when the message has been send
+     * @typedef {object} MessagePayload
+     * @property {boolean} should send - a flag that indicates if the message should be send to your chat partner or not
+     * @property {object} params - a set of parameters
+     * @property {string} type (e.g. SEND_MONEY)
+     *
+     * @desc send a message
+     * @param {string} chat the chat
+     * @param {MessagePayload} payload
+     * @param {function} callback will be called with an error
      */
     sendMessage: global.sendMessage,
     /**
@@ -65,5 +67,35 @@ export default {
      * @param {string} layout - the JSX Json layout
      * @param {function} callback - will ba called with an error after the modal got rendered
      */
-    renderModal: global.renderModal
+    renderModal: global.renderModal,
+    /**
+     * @desc Database (key => value storage)
+     */
+    db: {
+        /**
+         * @desc put value into database
+         * @param {string} key
+         * @param {*} value
+         * @param {function} callback will be called with an error
+         */
+        put: global.db.put,
+        /**
+         * @desc check if a value for the given key exist
+         * @param {string} key
+         * @param {function} callback will be called with an error an a boolean
+         */
+        has: global.db.has,
+        /**
+         * @desc get value from database
+         * @param {string} key
+         * @param {function} callback will be called with an error and the fetched value
+         */
+        get: global.db.get,
+        /**
+         * @desc delete value from key value storage
+         * @param {string} key
+         * @param {function} callback will be called with an error
+         */
+        delete: global.db.delete
+    }
 }
