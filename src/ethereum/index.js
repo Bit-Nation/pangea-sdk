@@ -1,5 +1,5 @@
 const Uint8Array = require('typedarray').Uint8Array;
-import {ethereumAddress} from '../vm-raw'
+import {ethereumAddress} from '../vm'
 
 const VMProvider = require('./vmProvider');
 const VMSigner = require('./VMSigner');
