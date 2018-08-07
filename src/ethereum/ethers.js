@@ -5008,7 +5008,10 @@
         })(typeof module === 'undefined' || module, this);
 
     },{"buffer":8}],7:[function(require,module,exports){
-        var randomBytes = require('../../utils').randomBytes; module.exports = function(length) { return randomBytes(length); };
+        var randomBytes = require('../../utils').randomBytes;
+        module.exports = function(length) {
+            return randomBytes(length);
+        };
     },{"../../utils":66}],8:[function(require,module,exports){
 
     },{}],9:[function(require,module,exports){

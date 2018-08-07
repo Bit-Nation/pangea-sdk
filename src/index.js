@@ -1,5 +1,4 @@
 import vm from './vm'
-import ethereum from './ethereum'
 import {renderMessage, renderModal} from './react/renderer'
 import {ModalComponent, Modal} from './react/dAppComponent'
 import Container from './react/container'
