@@ -7,7 +7,6 @@ import Container from './react/container'
 const Pangea = {
     ethereumAddress: vm.ethereumAddress,
     setMessageHandler: vm.setMessageHandler,
-    etherjs: ethereum,
     renderMessage: renderMessage,
     renderModal: renderModal,
     sendETHTransaction: vm.sendETHTransaction,
