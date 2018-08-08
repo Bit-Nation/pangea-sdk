@@ -35,7 +35,6 @@ const hostConfig = {
             if (typeof propValue === 'function') {
                 const funcID = registerFunction(propValue);
                 if (typeof funcID !== 'number'){
-                    console.log(funcID);
                     throw new Error(`failed to register function - expected number (id)`)
                 }
                 element.props[key] = funcID
@@ -143,6 +142,9 @@ export const renderMessage = (element, cb) => {
  */
 export const renderModal = (element, cb) => {
     const container = element.props.modalContainer;
+    container.props = {
+        title: element.props.title,
+    };
     if (!container){
         throw new Error(`Missing container for modal`)
     }

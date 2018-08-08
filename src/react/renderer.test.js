@@ -23,7 +23,10 @@ describe('renderer', () => {
             }
 
             renderMessage(<SentMoneyMessage  />, (jsx) => {
-                expect(jsx).toEqual([]);
+                expect(jsx).toEqual({
+                    props: {},
+                    children: []
+                });
                 done();
             })
 
@@ -50,35 +53,38 @@ describe('renderer', () => {
             }
 
             renderMessage(<SentMoneyMessage />, (jsx) => {
-                const expectedJsonTree = [{
-                    type: "View",
+                const expectedJsonTree = {
                     props: {},
-                    children: [
-                        {
-                            type: "Text",
-                            props: {},
-                            children: 'To: "0x30321931e6a786895e85d439b34be74bd4bb7a46"'
-                        },
-                        {
-                            type: "Text",
-                            props: {},
-                            children: 'Amount: 3 ETH'
-                        },
-                        {
-                            type: "View",
-                            props: {},
-                            children: [
-                                {
-                                    type: "Button",
-                                    props: {
-                                        url: "https://etherscan.io/tx/0xfa2357259e212a941acf124bc34f4e392e35db7b5002e38f8a9d420f93a9448f"
-                                    },
-                                    children: "Go to etherscan"
-                                }
-                            ]
-                        }
-                    ]
-                }];
+                    children: [{
+                        type: "View",
+                        props: {},
+                        children: [
+                            {
+                                type: "Text",
+                                props: {},
+                                children: 'To: "0x30321931e6a786895e85d439b34be74bd4bb7a46"'
+                            },
+                            {
+                                type: "Text",
+                                props: {},
+                                children: 'Amount: 3 ETH'
+                            },
+                            {
+                                type: "View",
+                                props: {},
+                                children: [
+                                    {
+                                        type: "Button",
+                                        props: {
+                                            url: "https://etherscan.io/tx/0xfa2357259e212a941acf124bc34f4e392e35db7b5002e38f8a9d420f93a9448f"
+                                        },
+                                        children: "Go to etherscan"
+                                    }
+                                ]
+                            }
+                        ]
+                    }]
+                };
 
                 expect(jsx).toEqual(expectedJsonTree);
 
@@ -112,7 +118,12 @@ describe('renderer', () => {
                     VM.renderModal.mockImplementation((uiID, jsxTree, cb) => {
 
                         if (this.state.called === 0){
-                            expect(jsxTree).toEqual(JSON.stringify([]));
+                            expect(jsxTree).toEqual(JSON.stringify({
+                                props: {
+                                    title: "my title"
+                                },
+                                children: []
+                            }));
 
                             this.state.elements.push(<Text>A</Text>);
                             this.state.called = 1;
@@ -120,13 +131,18 @@ describe('renderer', () => {
                         }
 
                         if (this.state.called === 1){
-                            expect(jsxTree).toEqual([
-                                {
-                                    type: "Text",
-                                    props: {},
-                                    children: "A"
-                                }
-                            ]);
+                            expect(jsxTree).toEqual({
+                                props: {
+                                    title: "my title"
+                                },
+                                children: [
+                                    {
+                                        type: "Text",
+                                        props: {},
+                                        children: "A"
+                                    }
+                                ]
+                            });
 
                             this.state.elements.push(testView);
                             this.state.called = 2;
@@ -134,24 +150,29 @@ describe('renderer', () => {
                         }
 
                         if (this.state.called === 2){
-                            expect(jsxTree).toEqual([
-                                {
-                                    type: "Text",
-                                    props: {},
-                                    children: "A",
+                            expect(jsxTree).toEqual({
+                                props: {
+                                    title: "my title"
                                 },
-                                {
-                                    type: "View",
-                                    props: {},
-                                    children: [
-                                        {
-                                            type: "Text",
-                                            props: {},
-                                            children: "B"
-                                        }
-                                    ]
-                                }
-                            ]);
+                                children: [
+                                    {
+                                        type: "Text",
+                                        props: {},
+                                        children: "A",
+                                    },
+                                    {
+                                        type: "View",
+                                        props: {},
+                                        children: [
+                                            {
+                                                type: "Text",
+                                                props: {},
+                                                children: "B"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            });
 
                             this.state.elements = this.state.elements.filter((e) => e !== testView)
                             this.state.called = 3;
@@ -159,13 +180,18 @@ describe('renderer', () => {
                         }
 
                         if (this.state.called === 3){
-                            expect(jsxTree).toEqual([
-                                {
-                                    type: "Text",
-                                    props: {},
-                                    children: "A"
-                                }
-                            ]);
+                            expect(jsxTree).toEqual({
+                                props: {
+                                    title: "my title"
+                                },
+                                children: [
+                                    {
+                                        type: "Text",
+                                        props: {},
+                                        children: "A"
+                                    }
+                                ]
+                            });
                             return done();
                         }
 
@@ -178,7 +204,31 @@ describe('renderer', () => {
                 }
             }
 
-            renderModal(<SendMoneyModal modalContainer={new Container("modal-ui-id")} />, () => {})
+            renderModal(<SendMoneyModal title="my title" modalContainer={new Container("modal-ui-id")} />, () => {})
+
+        });
+
+        test('only one element', (done) => {
+
+            VM.renderModal.mockImplementation((uiID, jsxTree, cb) => {
+                expect(uiID).toBe("our-ui-id");
+                expect(jsxTree).toBe(JSON.stringify({"props":{"title":"my title"},"children":[{"type":"Text","props":{},"children":"Hi there"}]}));
+                cb();
+            });
+
+            const Text = "Text";
+
+            class DemoModal extends Modal {
+                render(){
+                    return (
+                        <Text>Hi there</Text>
+                    )
+                }
+            }
+
+            renderModal(<DemoModal title={"my title"} modalContainer={new Container("our-ui-id")}/>, () => {
+                done()
+            })
 
         })
 

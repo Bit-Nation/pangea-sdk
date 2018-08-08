@@ -6,6 +6,7 @@ export default class Container {
     constructor(uiID){
         this.children = [];
         this.uiID = uiID;
+        this.props = {}
     }
 
     /**
@@ -39,7 +40,10 @@ export default class Container {
      * @desc get jsx tree as json
      */
     toJson(){
-        return this.children.map((child) => child.toJson())
+        return {
+            props: this.props,
+            children: this.children
+        }
     }
 
 }

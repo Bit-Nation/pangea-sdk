@@ -4,6 +4,9 @@ const {renderModal} = require('../vm');
 export class Message extends React.Component {}
 
 export class ModalComponent extends React.Component {
+    constructor(props){
+        super(props)
+    }
     setState(data, cb){
         const modalContainer = this.props.modalContainer;
         if (!modalContainer){
@@ -27,7 +30,7 @@ export class Modal extends ModalComponent{
      * @param props
      */
     constructor(props) {
-        super();
+        super(props);
         if (!props.modalContainer){
             throw new Error(`Modal needs an container`);
         }
