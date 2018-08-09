@@ -133,7 +133,7 @@ describe('renderer', () => {
                         }
 
                         if (this.state.called === 1){
-                            expect(jsxTree).toEqual({
+                            expect(jsxTree).toEqual(JSON.stringify({
                                 props: {
                                     title: "my title"
                                 },
@@ -144,7 +144,7 @@ describe('renderer', () => {
                                         children: "A"
                                     }
                                 ]
-                            });
+                            }));
 
                             this.state.elements.push(testView);
                             this.state.called = 2;
@@ -152,7 +152,7 @@ describe('renderer', () => {
                         }
 
                         if (this.state.called === 2){
-                            expect(jsxTree).toEqual({
+                            expect(jsxTree).toEqual(JSON.stringify({
                                 props: {
                                     title: "my title"
                                 },
@@ -174,7 +174,7 @@ describe('renderer', () => {
                                         ]
                                     }
                                 ]
-                            });
+                            }));
 
                             this.state.elements = this.state.elements.filter((e) => e !== testView)
                             this.state.called = 3;
@@ -182,7 +182,7 @@ describe('renderer', () => {
                         }
 
                         if (this.state.called === 3){
-                            expect(jsxTree).toEqual({
+                            expect(jsxTree).toEqual(JSON.stringify({
                                 props: {
                                     title: "my title"
                                 },
@@ -193,7 +193,7 @@ describe('renderer', () => {
                                         children: "A"
                                     }
                                 ]
-                            });
+                            }));
                             return done();
                         }
 

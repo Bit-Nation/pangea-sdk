@@ -19,7 +19,7 @@ export class ModalComponent extends React.Component {
             throw new Error("you have to pass a callback to set state")
         }
         super.setState(data, () => {
-            renderModal(modalContainer.uiID, modalContainer.toJson(), cb)
+            renderModal(modalContainer.uiID, JSON.stringify(modalContainer.toJson()), cb)
         })
     }
 }
