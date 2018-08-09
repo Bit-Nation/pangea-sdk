@@ -42,7 +42,7 @@ export default class Container {
     toJson(){
         return {
             props: this.props,
-            children: this.children
+            children: this.children.map((child) => child.toJson())
         }
     }
 

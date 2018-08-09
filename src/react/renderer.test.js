@@ -6,7 +6,8 @@ import Container from "./container";
 
 jest.mock('../vm', () => {
     return {
-        renderModal: jest.fn()
+        renderModal: jest.fn(),
+        registerFunction: jest.fn(),
     }
 });
 
@@ -91,7 +92,8 @@ describe('renderer', () => {
                 done();
             })
 
-        })
+        });
+
     });
 
     describe("modal rendering", () => {
@@ -228,6 +230,46 @@ describe('renderer', () => {
 
             renderModal(<DemoModal title={"my title"} modalContainer={new Container("our-ui-id")}/>, () => {
                 done()
+            })
+
+        });
+
+        test('render function', (done) => {
+
+            const expectedJsonTree = {
+                "props":{},
+                "children":[
+                    {
+                        "type":"Button",
+                        "props":{
+                            "onEvent": 1,
+                        },
+                        "children":[]
+                    }
+                ]
+            };
+
+            VM.registerFunction.mockImplementation((func) => {
+                expect(typeof func).toBe("function");
+                return 1;
+            });
+
+            VM.renderModal.mockImplementation((uiID, jsxTree, cb) => {
+                expect(uiID).toBe("id");
+                expect(jsxTree).toEqual(JSON.stringify(expectedJsonTree));
+                cb();
+            });
+
+            const Button = "Button";
+
+            class ModalComponent extends Modal {
+                render(){
+                    return (<Button onEvent={function () {}} />)
+                }
+            }
+
+            renderModal(<ModalComponent modalContainer={new Container("id")}/>, (jsx) => {
+                done();
             })
 
         })

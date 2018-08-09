@@ -142,12 +142,12 @@ export const renderMessage = (element, cb) => {
  */
 export const renderModal = (element, cb) => {
     const container = element.props.modalContainer;
-    container.props = {
-        title: element.props.title,
-    };
     if (!container){
         throw new Error(`Missing container for modal`)
     }
+    container.props = {
+        title: element.props.title,
+    };
     const root = container._reactRootContainer = PangeaRenderer.createContainer(container);
     return PangeaRenderer.updateContainer(element, root, null, () => {
         clientRenderModal(container.uiID, JSON.stringify(container.toJson()), cb);
