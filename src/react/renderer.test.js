@@ -203,6 +203,92 @@ describe('renderer', () => {
 
         });
 
+      test('state mutation with props changing', (done) => {
+
+        let call = 0;
+        VM.renderModal.mockImplementation((uiID, jsxTree, cb) => {
+
+          // assertion on initial rendering
+          if (call === 0){
+            expect(uiID).toBe("ui-id");
+            expect(jsxTree).toEqual(JSON.stringify({
+              props: {},
+              children: [
+                {
+                  type: "View",
+                  props: {},
+                  children: [
+                    {
+                      type: "Text",
+                      props: { color: 'old' },
+                      children: "Hi"
+                    }
+                  ]
+                }
+              ]
+            }));
+            call++;
+            return cb()
+          }
+
+          // assertion on re render
+          if (call === 1){
+            expect(uiID).toBe("ui-id");
+            expect(jsxTree).toEqual(JSON.stringify({
+              props: {},
+              children: [
+                {
+                  type: "View",
+                  props: {},
+                  children: [
+                    {
+                      type: "Text",
+                      props: { color: 'new' },
+                      children: "Hi"
+                    }
+                  ]
+                }
+              ]
+            }));
+            call++;
+            return cb();
+          }
+
+          throw new Error("unexpected case")
+        });
+
+        const Text = "Text";
+        const View = "View";
+
+        class MyModal extends Modal {
+          constructor(props){
+            super(props);
+            this.state = {
+              color: 'old'
+            }
+          }
+          componentDidMount(){
+            setTimeout(() => {
+              this.setState({color: 'new'}, () => {
+                done();
+              })
+            }, 100)
+          }
+          render(){
+            return (
+              <View>
+                <Text color={this.state.color}>
+                  Hi
+                </Text>
+              </View>
+            )
+          }
+        }
+
+        renderModal(<MyModal modalContainer={new Container("ui-id")}/>, () => {})
+
+      });
+
         test("success", (done) => {
 
             const Text = "Text";
