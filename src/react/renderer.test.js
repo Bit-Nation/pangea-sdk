@@ -222,6 +222,11 @@ describe('renderer', () => {
                       type: "Text",
                       props: { color: 'old' },
                       children: "old"
+                    },
+                    {
+                      type: "Text",
+                      props: { valueToBecomeUndefined: 'defined' },
+                      children: "defined"
                     }
                   ]
                 }
@@ -245,6 +250,11 @@ describe('renderer', () => {
                       type: "Text",
                       props: { color: 'new' },
                       children: "new"
+                    },
+                    {
+                      type: "Text",
+                      props: { valueToBecomeUndefined: undefined },
+                      children: undefined,
                     }
                   ]
                 }
@@ -264,12 +274,16 @@ describe('renderer', () => {
           constructor(props){
             super(props);
             this.state = {
-              color: 'old'
+              color: 'old',
+              valueToBecomeUndefined: 'defined'
             }
           }
           componentDidMount(){
             setTimeout(() => {
-              this.setState({color: 'new'}, () => {
+              this.setState({
+                color: 'new',
+                valueToBecomeUndefined: undefined
+              }, () => {
                 done();
               })
             }, 100)
@@ -279,6 +293,9 @@ describe('renderer', () => {
               <View>
                 <Text color={this.state.color}>
                   {this.state.color}
+                </Text>
+                <Text valueToBecomeUndefined={this.state.valueToBecomeUndefined}>
+                  {this.state.valueToBecomeUndefined}
                 </Text>
               </View>
             )
