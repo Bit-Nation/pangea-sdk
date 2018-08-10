@@ -131,8 +131,8 @@ const hostConfig = {
         throw new Error("commitTextUpdate not implemented")
     },
 
-    resetTextContent(domElement) {
-        throw new Error("resetTextContent not implemented")
+    resetTextContent(element) {
+        element.children = null;
     },
 
 };

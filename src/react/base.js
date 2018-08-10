@@ -53,10 +53,10 @@ export default class BaseElement extends Mutable {
 
     toJson(){
 
-        let children;
+        let children = undefined;
         if (typeof this.children === 'string' || typeof this.children === 'number'){
             children = this.children
-        } else {
+        } else if (this.children !== null && this.children !== undefined) {
             children = this.children.map((child) => {
                 if(typeof child === 'string' || typeof child === 'number') {
                     return child
