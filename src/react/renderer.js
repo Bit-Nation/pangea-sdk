@@ -55,6 +55,7 @@ const hostConfig = {
 
     // Calculate the updatePayload
     prepareUpdate(domElement, type, oldProps, newProps) {
+
         return newProps
     },
 
@@ -105,7 +106,21 @@ const hostConfig = {
         parentInstance.insertBefore(child, beforeChild);
     },
 
-    commitUpdate(domElement, updatePayload, type, oldProps, newProps, internalInstanceHandle) {},
+    commitUpdate(domElement, updatePayload, type, oldProps, newProps, internalInstanceHandle) {
+        // remove old props
+        Object.keys(oldProps).map((key) => {
+            if (typeof newProps[key] === "undefined"){
+                delete domElement.props[key]
+            }
+        });
+
+        // add new props
+        Object.keys(newProps).map((key) => {
+            if (key !== "children"){
+                domElement.props[key] = newProps[key]
+            }
+        })
+    },
 
     commitMount(domElement, type, newProps, internalInstanceHandle) {},
 
