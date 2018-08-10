@@ -1,39 +1,13 @@
-export default class Container {
+import {Mutable} from "./base";
+
+export default class Container extends Mutable {
     /**
      *
      * @param {string} uiID the location in pangea were this react will render
      */
     constructor(uiID){
-        this.children = [];
+        super();
         this.uiID = uiID;
-        this.props = {}
-    }
-
-    /**
-     *
-     * @param {object} child root child of this container
-     */
-    appendChild(child){
-        this.children.push(child)
-    }
-
-    /**
-     * @param child
-     */
-    removeChild(child){
-        this.children = this.children.filter((c) => c !== child)
-    }
-
-    /**
-     * @param child
-     * @param beforeChild
-     */
-    insertBefore(child, beforeChild){
-        this.children.map((currentChild, index) => {
-            if(currentChild === beforeChild){
-                this.children.splice(index, 0, child)
-            }
-        })
     }
 
     /**

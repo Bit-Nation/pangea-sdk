@@ -1,8 +1,44 @@
 import VM from '../vm'
 
-export default class BaseElement {
+export class Mutable {
+
+    constructor(){
+        this.children = [];
+        this.props = {}
+    }
+
+    /**
+     *
+     * @param {object} child root child of this container
+     */
+    appendChild(child){
+        this.children.push(child)
+    }
+
+    /**
+     * @param child
+     */
+    removeChild(child){
+        this.children = this.children.filter((c) => c !== child)
+    }
+
+    /**
+     * @param child
+     * @param beforeChild
+     */
+    insertBefore(child, beforeChild){
+        this.children.map((currentChild, index) => {
+            if(currentChild === beforeChild){
+                this.children.splice(index, 0, child)
+            }
+        })
+    }
+}
+
+export default class BaseElement extends Mutable {
 
     constructor(type) {
+        super();
         if (typeof type !== "string"){
             throw new Error(`type must be a string`)
         }
