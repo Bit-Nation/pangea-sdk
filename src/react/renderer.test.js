@@ -98,6 +98,80 @@ describe('renderer', () => {
 
     describe("modal rendering", () => {
 
+        test('state mutation', (done) => {
+
+            let call = 0;
+            VM.renderModal.mockImplementation((uiID, jsxTree, cb) => {
+
+                // assertion on initial rendering
+                if (call === 0){
+                    expect(uiID).toBe("ui-id");
+                    expect(jsxTree).toEqual(JSON.stringify({
+                        props: {},
+                        children: [
+                            {
+                                type: "Text",
+                                props: {},
+                                children: "hi"
+                            }
+                        ]
+                    }));
+                    call++;
+                    return cb()
+                }
+
+                // assertion on re render
+                if (call === 1){
+                    expect(uiID).toBe("ui-id");
+                    expect(jsxTree).toEqual(JSON.stringify({
+                        props: {},
+                        children: [
+                            {
+                                type: "Text",
+                                props: {},
+                                children: "hi"
+                            },
+                            {
+                                type: "Text",
+                                props: {},
+                                children: "there"
+                            }
+                        ]
+                    }));
+                    call++;
+                    return cb();
+                }
+
+                throw new Error("unexpected case")
+            });
+
+            const Text = "Text";
+
+            class MyModal extends Modal {
+                constructor(props){
+                    super(props);
+                    this.state = {
+                        text: [
+                            <Text>hi</Text>
+                        ]
+                    }
+                }
+                componentDidMount(){
+                    setTimeout(() => {
+                        this.setState({text: [<Text>Hi</Text>, <Text>there</Text>]}, () => {
+                            done();
+                        })
+                    }, 100)
+                }
+                render(){
+                    return this.state.text
+                }
+            }
+
+            renderModal(<MyModal modalContainer={new Container("ui-id")}/>, () => {})
+
+        });
+
         test("success", (done) => {
 
             const Text = "Text";
