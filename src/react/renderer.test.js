@@ -149,7 +149,7 @@ describe('renderer', () => {
                                 {
                                   type: "Text",
                                   props: {},
-                                  children: "hi"
+                                  children: "Hi"
                                 },
                                 {
                                   type: "Text",
@@ -203,7 +203,7 @@ describe('renderer', () => {
 
         });
 
-      test('state mutation with props changing', (done) => {
+      test('state mutation with props changing that going to text children', (done) => {
 
         let call = 0;
         VM.renderModal.mockImplementation((uiID, jsxTree, cb) => {
@@ -221,7 +221,7 @@ describe('renderer', () => {
                     {
                       type: "Text",
                       props: { color: 'old' },
-                      children: "Hi"
+                      children: "old"
                     }
                   ]
                 }
@@ -244,7 +244,7 @@ describe('renderer', () => {
                     {
                       type: "Text",
                       props: { color: 'new' },
-                      children: "Hi"
+                      children: "new"
                     }
                   ]
                 }
@@ -278,7 +278,7 @@ describe('renderer', () => {
             return (
               <View>
                 <Text color={this.state.color}>
-                  Hi
+                  {this.state.color}
                 </Text>
               </View>
             )
