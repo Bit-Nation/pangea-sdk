@@ -110,9 +110,21 @@ describe('renderer', () => {
                         props: {},
                         children: [
                             {
-                                type: "Text",
+                                type: "View",
                                 props: {},
-                                children: "hi"
+                                children: [
+                                  {
+                                    type: "View",
+                                    props: {},
+                                    children: [
+                                      {
+                                        type: "Text",
+                                        props: {},
+                                        children: "hi"
+                                      }
+                                    ]
+                                  }
+                                ]
                             }
                         ]
                     }));
@@ -124,19 +136,31 @@ describe('renderer', () => {
                 if (call === 1){
                     expect(uiID).toBe("ui-id");
                     expect(jsxTree).toEqual(JSON.stringify({
-                        props: {},
-                        children: [
+                      props: {},
+                      children: [
+                        {
+                          type: "View",
+                          props: {},
+                          children: [
                             {
-                                type: "Text",
-                                props: {},
-                                children: "hi"
-                            },
-                            {
-                                type: "Text",
-                                props: {},
-                                children: "there"
+                              type: "View",
+                              props: {},
+                              children: [
+                                {
+                                  type: "Text",
+                                  props: {},
+                                  children: "hi"
+                                },
+                                {
+                                  type: "Text",
+                                  props: {},
+                                  children: "there"
+                                }
+                              ]
                             }
-                        ]
+                          ]
+                        }
+                      ]
                     }));
                     call++;
                     return cb();
@@ -146,6 +170,7 @@ describe('renderer', () => {
             });
 
             const Text = "Text";
+            const View = "View";
 
             class MyModal extends Modal {
                 constructor(props){
@@ -164,7 +189,13 @@ describe('renderer', () => {
                     }, 100)
                 }
                 render(){
-                    return this.state.text
+                    return (
+                      <View>
+                        <View>
+                          {this.state.text}
+                        </View>
+                    </View>
+                    )
                 }
             }
 
