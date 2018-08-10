@@ -116,8 +116,11 @@ const hostConfig = {
 
         // add new props
         Object.keys(newProps).map((key) => {
+            // If children is text, we should update it.
             if (key !== "children"){
                 domElement.props[key] = newProps[key]
+            } else if (typeof newProps.children === 'string' || typeof newProps.children === 'number') {
+                domElement.children = newProps.children;
             }
         })
     },
