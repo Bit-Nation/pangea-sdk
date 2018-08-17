@@ -16,7 +16,7 @@ const hostConfig = {
     },
 
     createTextInstance(text, rootContainerInstance, internalInstanceHandle) {
-        throw new Error("createTextInstance not implemented")
+        return new BaseElement('text');
     },
 
     finalizeInitialChildren(element, type, props) {
@@ -55,7 +55,6 @@ const hostConfig = {
 
     // Calculate the updatePayload
     prepareUpdate(domElement, type, oldProps, newProps) {
-
         return newProps
     },
 
@@ -128,7 +127,7 @@ const hostConfig = {
     commitMount(domElement, type, newProps, internalInstanceHandle) {},
 
     commitTextUpdate(textInstance, oldText, newText) {
-        throw new Error("commitTextUpdate not implemented")
+        textInstance = newText;
     },
 
     resetTextContent(element) {
