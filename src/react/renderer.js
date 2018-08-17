@@ -25,7 +25,7 @@ const hostConfig = {
             const propValue = props[key];
 
             // handle "special" children
-            if (key === "children" && typeof propValue === 'number' || typeof propValue === 'string') {
+            if (key === "children" && (typeof propValue === 'number' || typeof propValue === 'string')) {
                 element.children = propValue;
             }
 
