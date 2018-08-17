@@ -142,13 +142,13 @@ const PangeaRenderer = Reconciler(hostConfig);
 /**
  * @desc render a message
  * @param {object} element
- * @param {function} cb will be called with the rendered JSX as json
+ * @param {function} cb will be called with the strigified rendered JSX as json
  */
 export const renderMessage = (element, cb) => {
     const container = new Container();
     const root = container._reactRootContainer = PangeaRenderer.createContainer(container);
     PangeaRenderer.updateContainer(element, root, null, () => {
-        cb(container.toJson())
+        cb(JSON.stringify(container.toJson()))
     });
 };
 
