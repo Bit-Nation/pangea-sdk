@@ -16,17 +16,15 @@ const hostConfig = {
     },
 
     createTextInstance(text, rootContainerInstance, internalInstanceHandle) {
-        const element = new BaseElement('text');
-        element.children = text;
+        return { isTextInstance: true, text };
     },
 
     finalizeInitialChildren(element, type, props) {
         Object.keys(props).map((key) => {
             const propValue = props[key];
 
-            // handle "special" children
-            if (key === "children" && (typeof propValue === 'number' || typeof propValue === 'string')) {
-                element.children = propValue;
+            if (key === "children") {
+                return;
             }
 
             // handle function value
@@ -35,12 +33,13 @@ const hostConfig = {
                 if (typeof funcID !== 'number'){
                     throw new Error(`failed to register function - expected number (id)`)
                 }
-                element.props[key] = funcID
+                element.props[key] = funcID;
+                return;
             }
 
-            element.props[key] = props[key]
+            element.props[key] = props[key];
         });
-        return element
+        return element;
     },
 
     // Useful only for testing
@@ -64,10 +63,7 @@ const hostConfig = {
     },
 
     shouldSetTextContent(type, props) {
-        return (
-            typeof props.children === 'string' ||
-            typeof props.children === 'number'
-        );
+        return false;
     },
 
     now: () => {
@@ -113,22 +109,20 @@ const hostConfig = {
 
         // add new props
         Object.keys(newProps).map((key) => {
-            // If children is text, we should update it.
-            domElement.props[key] = newProps[key]
-            if (key === "children" && (typeof newProps.children === 'string' || typeof newProps.children === 'number')) {
-                domElement.children = newProps.children;
+            if (key === "children") {
+                return;
             }
+            domElement.props[key] = newProps[key];
         })
     },
 
     commitMount(domElement, type, newProps, internalInstanceHandle) {},
 
     commitTextUpdate(textInstance, oldText, newText) {
-        textInstance = newText;
+        textInstance.text = newText;
     },
 
     resetTextContent(element) {
-        element.children = null;
     },
 
 };

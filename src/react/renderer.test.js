@@ -24,10 +24,10 @@ describe('renderer', () => {
             }
 
             renderMessage(<SentMoneyMessage  />, (jsx) => {
-                expect(jsx).toEqual({
+                expect(jsx).toEqual(JSON.stringify({
                     props: {},
                     children: []
-                });
+                }));
                 done();
             })
 
@@ -63,12 +63,12 @@ describe('renderer', () => {
                             {
                                 type: "Text",
                                 props: {},
-                                children: 'To: "0x30321931e6a786895e85d439b34be74bd4bb7a46"'
+                                children: ['To: "0x30321931e6a786895e85d439b34be74bd4bb7a46"']
                             },
                             {
                                 type: "Text",
                                 props: {},
-                                children: 'Amount: 3 ETH'
+                                children: ['Amount: 3 ETH']
                             },
                             {
                                 type: "View",
@@ -79,7 +79,7 @@ describe('renderer', () => {
                                         props: {
                                             url: "https://etherscan.io/tx/0xfa2357259e212a941acf124bc34f4e392e35db7b5002e38f8a9d420f93a9448f"
                                         },
-                                        children: "Go to etherscan"
+                                        children: ["Go to etherscan"]
                                     }
                                 ]
                             }
@@ -87,7 +87,7 @@ describe('renderer', () => {
                     }]
                 };
 
-                expect(jsx).toEqual(expectedJsonTree);
+                expect(jsx).toEqual(JSON.stringify(expectedJsonTree));
 
                 done();
             })
@@ -120,7 +120,7 @@ describe('renderer', () => {
                                       {
                                         type: "Text",
                                         props: {},
-                                        children: "hi"
+                                        children: ["hi"]
                                       }
                                     ]
                                   }
@@ -149,12 +149,12 @@ describe('renderer', () => {
                                 {
                                   type: "Text",
                                   props: {},
-                                  children: "Hi"
+                                  children: ["Hi"]
                                 },
                                 {
                                   type: "Text",
                                   props: {},
-                                  children: "there"
+                                  children: ["there"]
                                 }
                               ]
                             }
@@ -221,12 +221,12 @@ describe('renderer', () => {
                     {
                       type: "Text",
                       props: { color: 'old' },
-                      children: "old"
+                      children: ["old"]
                     },
                     {
                       type: "Text",
                       props: { valueToBecomeUndefined: 'defined' },
-                      children: "defined"
+                      children: ["defined"]
                     }
                   ]
                 }
@@ -249,12 +249,12 @@ describe('renderer', () => {
                     {
                       type: "Text",
                       props: { color: 'new' },
-                      children: "new"
+                      children: ["new"]
                     },
                     {
                       type: "Text",
                       props: { valueToBecomeUndefined: undefined },
-                      children: undefined,
+                      children: [],
                     }
                   ]
                 }
@@ -349,7 +349,7 @@ describe('renderer', () => {
                                     {
                                         type: "Text",
                                         props: {},
-                                        children: "A"
+                                        children: ["A"]
                                     }
                                 ]
                             }));
@@ -368,7 +368,7 @@ describe('renderer', () => {
                                     {
                                         type: "Text",
                                         props: {},
-                                        children: "A",
+                                        children: ["A"],
                                     },
                                     {
                                         type: "View",
@@ -377,7 +377,7 @@ describe('renderer', () => {
                                             {
                                                 type: "Text",
                                                 props: {},
-                                                children: "B"
+                                                children: ["B"]
                                             }
                                         ]
                                     }
@@ -398,7 +398,7 @@ describe('renderer', () => {
                                     {
                                         type: "Text",
                                         props: {},
-                                        children: "A"
+                                        children: ["A"]
                                     }
                                 ]
                             }));
@@ -422,7 +422,7 @@ describe('renderer', () => {
 
             VM.renderModal.mockImplementation((uiID, jsxTree, cb) => {
                 expect(uiID).toBe("our-ui-id");
-                expect(jsxTree).toBe(JSON.stringify({"props":{"title":"my title"},"children":[{"type":"Text","props":{},"children":"Hi there"}]}));
+                expect(jsxTree).toBe(JSON.stringify({"props":{"title":"my title"},"children":[{"type":"Text","props":{},"children":["Hi there"]}]}));
                 cb();
             });
 
