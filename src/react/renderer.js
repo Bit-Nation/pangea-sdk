@@ -16,7 +16,8 @@ const hostConfig = {
     },
 
     createTextInstance(text, rootContainerInstance, internalInstanceHandle) {
-        return new BaseElement('text');
+        const element = new BaseElement('text');
+        element.children = text;
     },
 
     finalizeInitialChildren(element, type, props) {
@@ -24,11 +25,8 @@ const hostConfig = {
             const propValue = props[key];
 
             // handle "special" children
-            if (key === "children") {
-                if (typeof propValue === 'number' || typeof propValue === 'string') {
-                    element.children = propValue;
-                }
-                return
+            if (key === "children" && typeof propValue === 'number' || typeof propValue === 'string') {
+                element.children = propValue;
             }
 
             // handle function value
@@ -116,9 +114,8 @@ const hostConfig = {
         // add new props
         Object.keys(newProps).map((key) => {
             // If children is text, we should update it.
-            if (key !== "children"){
-                domElement.props[key] = newProps[key]
-            } else if (typeof newProps.children === 'string' || typeof newProps.children === 'number') {
+            domElement.props[key] = newProps[key]
+            if (key === "children" && (typeof newProps.children === 'string' || typeof newProps.children === 'number')) {
                 domElement.children = newProps.children;
             }
         })
