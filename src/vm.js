@@ -78,24 +78,24 @@ export default {
          * @param {*} value
          * @param {function} callback will be called with an error
          */
-        put: global.db.put,
+        put: global.dbPut,
         /**
          * @desc check if a value for the given key exist
          * @param {string} key
          * @param {function} callback will be called with an error an a boolean
          */
-        has: global.db.has,
+        has: global.dbHas,
         /**
          * @desc get value from database
          * @param {string} key
          * @param {function} callback will be called with an error and the fetched value
          */
-        get: global.db.get,
+        get: global.dbGet,
         /**
          * @desc delete value from key value storage
          * @param {string} key
          * @param {function} callback will be called with an error
          */
-        delete: global.db.delete
+        delete: global.dbDelete
     }
 }
